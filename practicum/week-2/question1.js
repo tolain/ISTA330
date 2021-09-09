@@ -7,4 +7,7 @@ For example given the input array [5, 6, 1], the running sum is
 
 var runningSum = function(input) {
    
-};
+};var x = []
+for input in range(x):
+res = [x[0], x[0] + x[1], x[0] + x[1] + x[2]]
+console.log(res)
