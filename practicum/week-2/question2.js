@@ -9,7 +9,15 @@ Example: input: cookies = [3, 5, 8] , extraCookies = 8
          and therfore each of the three kids will get 8 cookies.
  */
 
- var canGetEqualCookies = function(cookies, extraCookies) {
-     
-    
- };
+var canGetEqualCookies = function(cookies, extraCookies) {
+         var total = 0
+         num = cookies.length;
+         for (let i = 0; i < cookies.length; i++){
+                 total += cookies[i]
+         }
+         total += extraCookies;
+         if(total % num == 0){
+                 return True;
+         }
+         return False;
+};
