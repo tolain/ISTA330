@@ -12,3 +12,5 @@ var runningSum = function(input) {
        sum = sum + input[i];
        a.push(sum);
    }
+   return a;
+}
