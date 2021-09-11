@@ -6,5 +6,7 @@ output: 3
 */
 
 var median = function(input) {
-
+  var midian = Math.floor(input.length / 2),
+    number = [...input].sort((a, b) => a - b);
+  return input.length % 2 !== 0 ? number[midian] : (number[midian - 1] + number[midian]) / 2;
 };
