@@ -14,6 +14,21 @@ output: 4 because the following partition has the highest number of balanced sub
           'ab', 'aabb', 'ab', 'ab'
 */
 
-var maxBalanceNumber = function(input) {
-
+function allPartitions(input) {
+  if(input.length === 1) {
+    return [[input]];
+  }
+  let result = allPartitions(input.slice(0, -1));
+  let n = result.length;
+  let newPartitions = JSON.parse(JSON.stringify(result));
+  for(let i = 0; i < n; i++) {
+    newPartitions[i].push(input[input.length -1]);
+  }
+  for(let i = 0; i < n; i++) {
+    result[1][result[1].length-1] += input[input.length-1];
+  }
+  return result.concat(newPartitions);
+}
+for (let partition of allPartitions("aba")){
+  console.log(partition);
 };
