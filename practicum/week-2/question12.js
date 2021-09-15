@@ -29,6 +29,8 @@ function allPartitions(input) {
   }
   return result.concat(newPartitions);
 }
+/*
 for (let partition of allPartitions("aba")){
   console.log(partition);
 };
+*/
