@@ -17,7 +17,9 @@ var canGetEqualCookies = function(cookies, extraCookies) {
          }
          total += extraCookies;
          if(total % num == 0){
-                 return True;
+                return true;
          }
-         return False;
+         return false;
 };
+let q2test = canGetEqualCookies([3, 5, 8], 8);
+console.log(q2test)
