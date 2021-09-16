@@ -20,5 +20,8 @@ var howManyCommon = function(A, B) {
         }
 
     }
-    return count;
+    return c;
 };
+
+console.log(howManyCommon('gtY', 'iTygrtg'))
+
