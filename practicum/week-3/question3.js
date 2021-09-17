@@ -12,6 +12,21 @@ output: [
 ]
 */
 
-var PascalTriangle = function(n) {
-
-};
+var PascalTriangle = function (n) {
+    if (n === 0) {
+        return [];
+    } else if (n === 1) {
+        return [[1]];
+    } else {
+        let res = [[1], [1, 1]];
+        for (let i = 2; i < n; i++) {
+            let beg = [1];
+            for (let j = 1; j < i; j++) {
+                beg[j] = res[i-1][j-1] + res[i-1][j];
+            }
+            beg[i] = 1;
+            res[i] = beg;
+        }
+        return res;
+    }
+}
