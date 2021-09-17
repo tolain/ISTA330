@@ -11,12 +11,11 @@ output: [5, 5, 2, 2, 2, 2]
 
 var decode = function(input) {
   var li = []
-  for (i = 0; i < input.length / 2; i++){
-    let decoded = input[2 * i];
-    let res = input[2 * i * 1];
-    for (j = 0; j < decoded; j++){
-      li.push(res);
-    }
+  for (i = 0;i<input.length;i+= 2){
+	  for (j = 0;j<input[i];j++){
+	      li.push(input[i+1]);
+	}
   }
   return li;
 };
+console.log(decode([2, 5, 4, 2]))
