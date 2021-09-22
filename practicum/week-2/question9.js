@@ -9,7 +9,11 @@ output: 'hello'
 */
 
 var suffleString = function(input, shuffleIndices) {
+<<<<<<< HEAD
   const res = [];
+=======
+  var res = [];
+>>>>>>> 42b1682d505cbc2dcf13ccad234df560baa332d4
   for (let i = 0; i < shuffleIndices.length; i++){
     let result = shuffleIndices[i];
     res[result] = input.charAt(i);

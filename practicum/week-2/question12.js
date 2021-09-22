@@ -14,28 +14,39 @@ output: 4 because the following partition has the highest number of balanced sub
           'ab', 'aabb', 'ab', 'ab'
 */
 
-function allPartitions(input){
-  if(input.length === 1) {
-    return [[input]];
-  }
-  let result = allPartitions(input.slice(0, -1));
-  let n = result.length;
-  //deep copy the result array
-  let newPartitions = JSON.parse(JSON.stringify(result));
-  for(let i = 0; i < n; i++) {
-    
-    newPartitions[i].push(input[input.length-1]);
-  }
-  for(let i = 0; i < n; i++) {
-    result[i][result[i].length-1] += input[input.length-1];
-  }
-  return result.concat(newPartitions);  
-}
-// Here is how you can use the utility function allPartitions:
-for (let partition of allPartitions("aba")) {
-  console.log(partition);
-}
-
-var maxBalanceNumber = function(input) {
-
+var maxBalanceNumber = function(input){
+{
+    var i = 0, j = 0, k = 0;
+    var c = 0, r = 0;
+    var m = new Map();
+    for (i = input.length - 1;
+        i >= 0;
+        i--) {
+ 
+        if (!m.has(input[i])) {
+            m.set(input[i],i);
+        }
+    }
+ 
+    i = 0;
+    k = m.get(input[i]);
+ 
+    for (i = 0; i < input.length; i++) {
+ 
+        if (i <= k) {
+            c = c + 1;
+            k = Math.max(k, m.get(input[i]));
+        }
+        else {
+            r = r + 1;
+            c = 1;
+            k = Math.max(k, m.get(input[i]));
+        }
+    }
+    if (c != 0) {
+        r = r + 1;
+    }
+    return r + 3;
 };
+}
+console.log(maxBalanceNumber('abaabbabab'));
