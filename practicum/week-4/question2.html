@@ -1,106 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
+    <style>
+        img {
+            width: 200px;
+            height: 200px;
+            padding: 2px;
+            border: 1px #ccc solid
+        }
+    </style>
 </head>
-
 <body>
-    <div id="question">
-        1. Display the flowers as per question 1.<br />
-        2. Add the following functionality to the page:<br />
-        When users click on an image, the images should be
-        reorganized using the following rule:<br />
-        The flower that has been clicked goes to the first position in
-        the first row. The next position in the first row will
-        be the flower whose name is alphabeticlly right after the
-        name of the first one and so on for the other flowers.
-        <br />
-        So, for example if a user clicks on the flower lily,
-        then the flowers should be rearranged as:
-        <br />
-        <table>
-            <tr>
-                <td>
-                    lily
-                </td>
-                <td>
-                    rose
-                </td>
-                <td>
-                    sunflower
-                </td>
-                <td>
-                    tulip
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    water lily
-                </td>
-                <td>
-                    cherry blossom
-                </td>
-                <td>
-                    daffodil
-                </td>
-                <td>
-                    daisy
-                </td>
-            </tr>
-        </table>
-
-    </div>
     <div id='flowersDiv'>
 
     </div>
     <script>
-        /*
-           1. Display the flowers as per question 1.
-           2. Add the following functionality to the page:
-              When users click on an image, the images should be 
-              reorganized using the following rule:
-              The flowers that has been clicked goes to the first position in
-              the first row. The next position in the first row will
-              be the flower whose name is alphabeticlly right after the
-              name of the first one and so on for the other flowers.
+       class Flower {
+           constructor(name, pictureName) {
+               this.name = name;
+               this.picture = pictureName;
+           }
+       }
+       let daffodil = new Flower('Daffodil', 'https://habahram.blob.core.windows.net/flowers/daffodil.jpg');
+       let cherryblossom = new Flower('Cherry blossom', 'https://habahram.blob.core.windows.net/flowers/cherryblossom.jpg');
+       let lily = new Flower('Lily', 'https://habahram.blob.core.windows.net/flowers/lily.jpg');
+       let daisy = new Flower('Daisy', 'https://habahram.blob.core.windows.net/flowers/daisy.jpg');
+       let sunflower = new Flower('Sunflower', 'https://habahram.blob.core.windows.net/flowers/sunflower.jpg');
+       let tulip = new Flower('Tulip', 'https://habahram.blob.core.windows.net/flowers/tulip.jpg');
+       let rose = new Flower('Rose', 'https://habahram.blob.core.windows.net/flowers/rose.jpg');
+       let waterlily = new Flower('Water lily', 'https://habahram.blob.core.windows.net/flowers/waterlily.jpg');
+       
+       let flowers = [
+             daffodil,
+             cherryblossom,
+             lily,
+             daisy,
+             sunflower,
+             tulip,
+             rose,
+             waterlily
+       ];
 
-              So, for example if a user clicks on the flower lily,
-              then the flowers should be rearranged as:
-
-         lily       rose           sunflower   tulip
-        waterlily   cherryblossom  daffodil    daisy 
+       function compare( a, b ) {
+            
+            if ( a.name < b.name ){
+                return -1;
+            }
+            if ( a.name > b.name ){
+                return 1;
+            }
+            return 0;
+        }
         
-        */
-        class Flower {
-            constructor(name, pictureName) {
-                this.name = name;
-                this.picture = pictureName;
+        let images = document.getElementById("flowersDiv").getElementsByTagName("td");
+        
+        function populate(array) {
+            flowersDiv = document.getElementById("flowersDiv")
+            table = ""
+            table += "<table>";
+            for(i=0; i<flowers.length; i++) {
+                if(i%4 === 0 ) {
+                        table += "\n<tr>";
+                }
+                table += "\n<td id=" +  i + "><img src='" + array[i].picture + "'><br>"+ array[i].name + "</td>";  
+                if(i%4 === 3) {
+                    table += "</tr>";
+                }
+            }
+            table += "\n</table>";
+            flowersDiv.innerHTML = table;
+            
+            setEvent();
+        }
+       
+        
+        function setEvent() {
+            for(let image of images) {
+                image.addEventListener("click", function() {
+                    
+                    index = this.getAttribute("id")
+                   
+                    item = flowers[index];
+                    
+                    flowers = flowers.sort(compare);
+                   
+                    index = flowers.indexOf(item);
+                    
+                    var p1 = flowers.slice(0,index).sort(compare);
+                    var p2 = flowers.slice(index).sort(compare);
+                    
+                    
+                    flowers = p2.concat(p1);
+                    
+                    populate(flowers)
+                });
             }
         }
-        let daffodil = new Flower('Daffodil', 'https://habahram.blob.core.windows.net/flowers/daffodil.jpg');
-        let cherryblossom = new Flower('Cherry blossom', 'https://habahram.blob.core.windows.net/flowers/cherryblossom.jpg');
-        let lily = new Flower('Lily', 'https://habahram.blob.core.windows.net/flowers/lily.jpg');
-        let daisy = new Flower('Daisy', 'https://habahram.blob.core.windows.net/flowers/daisy.jpg');
-        let sunflower = new Flower('Sunflower', 'https://habahram.blob.core.windows.net/flowers/sunflower.jpg');
-        let tulip = new Flower('Tulip', 'https://habahram.blob.core.windows.net/flowers/tulip.jpg');
-        let rose = new Flower('Rose', 'https://habahram.blob.core.windows.net/flowers/rose.jpg');
-        let waterlily = new Flower('Water lily', 'https://habahram.blob.core.windows.net/flowers/waterlily.jpg');
-
-        let flowers = [
-            daffodil,
-            cherryblossom,
-            lily,
-            daisy,
-            sunflower,
-            tulip,
-            rose,
-            waterlily
-        ];
+     
+        populate(flowers)
+        
     </script>
 </body>
-
 </html>
