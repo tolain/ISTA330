@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
     <style>
         img {
@@ -56,9 +54,15 @@
             }
             return 0;
         }
+<<<<<<< HEAD
         
         let images = document.getElementById("flowersDiv").getElementsByTagName("td");
         
+=======
+        
+        let images = document.getElementById("flowersDiv").getElementsByTagName("td");
+        
+>>>>>>> 51054ca9a6e740d2ceb29074f0dc1b126771554e
         function populate(array) {
             flowersDiv = document.getElementById("flowersDiv")
             table = ""
@@ -94,6 +98,10 @@
                     var p1 = flowers.slice(0,index).sort(compare);
                     var p2 = flowers.slice(index).sort(compare);
                     
+<<<<<<< HEAD
+=======
+                    
+>>>>>>> 51054ca9a6e740d2ceb29074f0dc1b126771554e
                     flowers = p2.concat(p1);
                     
                     populate(flowers)
@@ -105,4 +113,8 @@
         
     </script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 51054ca9a6e740d2ceb29074f0dc1b126771554e
