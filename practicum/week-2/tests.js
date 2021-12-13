@@ -1,33 +1,3 @@
-<<<<<<< HEAD
-var largestGroupsCount = function(n) {
-	let digit_sum = {};
-	for (let i = 1; i <= n; i++) {
-		let sum = 0;
-		let num = i;
-		while (num > 0) {
-			sum += num % 10;
-			num = Math.floor(num / 10);
-	}
-	if (!digit_sum[sum]) {
-		digit_sum[sum] = [];
-	}
-		digit_sum[sum].push(i);
-	}
-	let max_count = 0;
-	for (let n in digit_sum) {
-		if (digit_sum[n].length > max_count) {
-			max_count = digit_sum[n].length;
-	}
-	let result = 0;
-	for (let n in digit_sum) {
-		if (digit_sum[n].length === max_count) {
-			++result;
-		}
-	}
-	return result;{
-        console.log(largestGroupsCount(11))
-=======
-
 const q1 = [{
     input: [[5, 6, 1]],
     output: [5, 11, 12]
@@ -207,5 +177,76 @@ let result = [{
     functionCode: maxBalanceNumber,
     trials: [],
     cases: q12
->>>>>>> 36c0fed2e2f0e687d955e1bd6391f2b256c304ec
+}
+];
+
+function isEqual(a1, a2){
+    const t = typeof(a1);
+    if((t === 'boolean') || (t === 'number') || (t === 'string')){
+        return a1 === a2;
+    }
+    
+    if(!a1 || !a2 || a1.length !== a2.length) {
+        return false;
+    }
+    for(let i = 0; i < a1.length; i++) {
+        if(!isEqual(a1[i], a2[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+for(let f of result){
+    for(let x of f.cases){    
+        let trial = {status: 'failed',
+         input: x.input + "",
+        expected: x.output, 
+        output: undefined};
+        trial.output = f.functionCode(...x.input);
+        if(isEqual(x.output, trial.output)) {
+            trial.status = 'success'
+        }
+        f.trials.push(trial);
+    }
+}
+
+
+
+function showTestsResults() {
+    for (x of result) {
+        let newDiv = document.createElement("div");
+        let functionName = document.createElement("div");
+        let name = document.createTextNode(x.functionName + ":");
+        functionName.appendChild(name);
+        functionName.className = 'functionName';
+        newDiv.className = 'functionDiv';
+        newDiv.appendChild(functionName);
+        let ol = document.createElement('ol');
+        for(y of x.trials) {
+            let li = document.createElement('li');
+            let content = document.createTextNode(`${y.status}`);
+            li.appendChild(content);
+            let br1 = document.createElement('br');
+            li.appendChild(br1);
+            let input = document.createTextNode(`input: ${y.input}`);
+            li.appendChild(input);
+            let br2 = document.createElement('br');
+            li.appendChild(br2);
+            let output = document.createTextNode(`output: ${y.output}`);
+            li.appendChild(output);
+            let br3 = document.createElement('br');
+            li.appendChild(br3);
+            let expected = document.createTextNode(`expected: ${y.expected}`);
+            li.appendChild(expected);
+            if(y.status === 'failed') {
+                li.className = 'failed';
+            } else {
+                li.className = 'success';
+            }                                       
+            ol.appendChild(li);
+        }
+        newDiv.appendChild(ol);
+        document.body.appendChild(newDiv);
+    }
 }
